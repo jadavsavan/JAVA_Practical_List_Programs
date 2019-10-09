@@ -1,0 +1,91 @@
+Practical_5
+----------------------------------------------------------------------------------------------------
+HTML_file
+file_Name = Practical_5.html
+----------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Practical_5</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--style teg is not compulsory  {line no: 13 -> 37 }  -->
+        <style>
+            input[type="number"]
+            {
+              width: 350px;
+              font-size: 20px;
+              font-weight: bold;
+              background-color: greenyellow;
+              padding:10px;
+              outline: none;
+              border-radius: 10px;
+            }
+            input[type="submit"]{
+                width: 350px;
+                padding:12px;
+                outline: none;
+                border:3px solid black;
+                background-image: linear-gradient(to left, white , yellow ,white);
+                font-size: 30px;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+            input[type="submit"]:hover{
+                background-image: linear-gradient(to left, red , white,red);
+            }
+        </style>
+            
+    </head>
+    <body bgcolor="lightgray">
+        <center>
+        <form action="Practical_5">
+            <input type="number" name="num1" placehold="Enter FirstNumber Here :)"><br><br>
+            <input type="number" name="num2" placehold="Enter SecondNumber Here :)"><br><br>
+            <input type="number" name="num3" placehold="Enter ThardNumber Here :)"><br><br>
+            <input type="submit" value="Find Max =>">
+        </form>
+        </center>
+    </body>
+</html>
+----------------------------------------------------------------------------------------------------
+JAVA_file => [ Servlet ]
+file_Name = Practical_5.java
+----------------------------------------------------------------------------------------------------
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/* @author JADAV SAVAN  */
+@WebServlet("/Practical_5")
+public class Practical_5 extends HttpServlet {
+ 
+    public void service(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+      int n1,n2,n3;
+      RequestDispatcher rd = request.getRequestDispatcher("Practical_5.html");   
+      PrintWriter out = response.getWriter();
+      n1=Integer.parseInt(request.getParameter("num1"));
+      n2=Integer.parseInt(request.getParameter("num2"));
+      n3=Integer.parseInt(request.getParameter("num3"));
+     if(n1 == n2 && n1==n3){
+          out.println("<center><b style='color:darkblue;font-size:60px;'>Every Number Have Same Value :)</b></center>");
+          rd.include(request, response);
+         
+     }else if(n1>n2 && n1>n3){
+         out.println("<center><b style='color:darkblue;font-size:60px;'>Maximum Number : "+n1+"</b></center>");
+         rd.include(request, response);
+     }
+     else if(n2 > n3){
+         out.println("<center><b style='color:darkblue;font-size:60px;'>Maximum Number : "+n2+"</b></center>");
+         rd.include(request, response);
+     }else{
+         out.println("<center><b style='color:darkblue;font-size:60px;'>Maximum Number : "+n3+"</b></center>");
+         rd.include(request, response);
+     }
+    }
+}
