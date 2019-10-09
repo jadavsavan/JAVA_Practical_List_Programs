@@ -1,0 +1,61 @@
+Practical_4
+----------------------------------------------------------------------------------------------------
+HTML_File
+File Name = Practical_4.html
+----------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Practical_4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body bgcolor="gray"> 
+        <form action="Practical_4">
+           <center>
+            <lable for="input1" style="font-size:20px;color:white;">Enter Number : </lable>
+            <input type="text" id="input1" name="number1" placeholder="Enter number here" ><br><br>
+            <input type="submit" value="Done"style="width:320px;outline:none;">
+           </center>
+        </form>
+        
+    </body>
+</html>
+----------------------------------------------------------------------------------------------------
+JAVA_file => [Servlet]
+file Name = Practical_4.java
+----------------------------------------------------------------------------------------------------
+package Practical_4;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/*      @author JADAV SAVAN        */
+@WebServlet("/Practical_4")
+public class Practical_4 extends HttpServlet {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      PrintWriter out =response.getWriter(); 
+      RequestDispatcher rd =  request.getRequestDispatcher("Practical_4.html");
+      int str1 = 0,sum=0;
+      try{
+         str1 = Integer.parseInt(request.getParameter("number1"));
+     String str2 = request.getParameter("number1");
+     for(int i = str2.length();i>0;i--){
+         sum = sum + Integer.parseInt(str2.charAt(i-1)+"");
+         
+     }
+       out.println("<center><b style='color:white;font-size:50px;'>Sum all the digits : "+sum+"</b></center>");
+       rd.include(request, response);
+
+    
+   }catch(NumberFormatException e){
+         out.println("<center><b style='color:white;font-size:50px;'>Enter Valid Number :)</b></center>");
+         rd.include(request, response);
+      }
+   }
+}
